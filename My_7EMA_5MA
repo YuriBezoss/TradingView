@@ -1,0 +1,46 @@
+//@version=4
+study(title="SUM", shorttitle="KL1", overlay=true)
+len1 = input(13, minval=1, title="EMA 1")
+len2 = input(21, minval=1, title="EMA 2")
+len3 = input(213, minval=1, title="EMA 3")
+//len7 = input(11, minval=1, title="MA 1")
+//len8 = input(23, minval=1, title="MA 2")
+//len9 = input(25, minval=1, title="MA 3")
+
+src1 = input(close, title="EMA 1 Source")
+src2 = input(close, title="EMA 2 Source")
+src3 = input(close, title="EMA 3 Source")
+//src7 = input(close, title="MA 1 Source")
+//src8 = input(close, title="MA 2 Source")
+//src9 = input(close, title="MA 3 Source")
+
+ema1 = ema(src1, len1)
+ema2 = ema(src2, len2)
+ema3 = ema(src3, len3)
+//ma1  = sma(src7, len7)
+//ma2  = sma(src8, len8)
+//ma3  = sma(src9, len9)
+
+plot(ema1, color=#fbff00, linewidth=2, title="EMA 1")
+plot(ema2, color=#00ffea, linewidth=2, title="EMA 2")
+plot(ema3, color=#0044ff, linewidth=2, title="EMA 3")
+//plot(ma1, color=#ff9100, linewidth=2, title="MA 1")
+//plot(ma2, color=#6600ff, linewidth=2, title="MA 2")
+//plot(ma3, color=#00ff08, linewidth=2, title="MA 3")
+
+//@version=4
+//study(shorttitle="BB", title="Bollinger Bands", overlay=true, resolution="")
+length = input(20, minval=1)
+src = input(close, title="Source")
+mult = input(2.0, minval=0.001, maxval=50, title="StdDev")
+basis = sma(src, length)
+dev = mult * stdev(src, length)
+upper = basis + dev
+lower = basis - dev
+offset = input(0, "Offset", type = input.integer, minval = -500, maxval = 500)
+plot(basis, "Basis", color=#FF6D00, offset = offset)
+p1 = plot(upper, "Upper", color=#FF0000, offset = offset)
+p2 = plot(lower, "Lower", color=#00FF00, offset = offset)
+fill(p1, p2, title = "Background", color=#f38721)
+
+//plot(volume, color=#2962FF)
